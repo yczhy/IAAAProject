@@ -83,12 +83,12 @@ namespace Duskvern
         #region 字段
 
         [SerializeField] // 对象池回收和取出的策略
-        private NotificationType notification = NotificationType.None;
+        private E_NotificationType eNotification = E_NotificationType.None;
 
-        public NotificationType Notification
+        public E_NotificationType ENotification
         {
-            set { notification = value; }
-            get { return notification; }
+            set { eNotification = value; }
+            get { return eNotification; }
         }
 
         [SerializeField] // 对象激活和隐藏的策略
@@ -420,9 +420,9 @@ namespace Duskvern
                 DebugLogger.LogError("对象池物体为null" + Name, false);
             }
 
-            switch (notification)
+            switch (eNotification)
             {
-                case NotificationType.IPoolable:
+                case E_NotificationType.IPoolable:
                     clone.GetComponents(tempPoolables);
                     for (var i = tempPoolables.Count - 1; i >= 0; i--)
                     {
@@ -431,7 +431,7 @@ namespace Duskvern
                     }
 
                     break;
-                case NotificationType.BroadcastIPoolable:
+                case E_NotificationType.BroadcastIPoolable:
                     clone.GetComponentsInChildren(tempPoolables);
                     for (var i = tempPoolables.Count - 1; i >= 0; i--)
                     {
@@ -610,9 +610,9 @@ namespace Duskvern
 
             SetCloneParent(clone);
 
-            switch (notification)
+            switch (eNotification)
             {
-                case NotificationType.IPoolable:
+                case E_NotificationType.IPoolable:
                     clone.GetComponents(tempPoolables);
                     for (var i = tempPoolables.Count - 1; i >= 0; i--)
                     {
@@ -621,7 +621,7 @@ namespace Duskvern
                     }
 
                     break;
-                case NotificationType.BroadcastIPoolable:
+                case E_NotificationType.BroadcastIPoolable:
                     clone.GetComponentsInChildren(tempPoolables);
                     for (var i = tempPoolables.Count - 1; i >= 0; i--)
                     {
@@ -714,7 +714,7 @@ namespace Duskvern
             }
 
             {
-                this.Notification = _config.notification;
+                this.ENotification = _config.eNotification;
                 this.Strategy = _config.strategy;
                 this.Capacity = _config.capacity;
                 this.Recycle = _config.recycle;

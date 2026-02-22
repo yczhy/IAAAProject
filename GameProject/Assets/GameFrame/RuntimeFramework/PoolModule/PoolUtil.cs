@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Duskvern
@@ -126,6 +127,11 @@ namespace Duskvern
             if (prefab == null)
             {
                 DebugLogger.LogError("Attempting to spawn a null prefab.", false);
+                return null;
+            }
+            if (prefab.GetComponent<IPoolable>() == null)
+            {
+                Debug.LogError("预制件上未挂载 IPoolable");
                 return null;
             }
             

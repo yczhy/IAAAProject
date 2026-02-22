@@ -32,7 +32,7 @@ namespace Duskvern
 
         public override void Unload()
         {
-            ReleasePool(ReleasePoolType.All);
+            ReleasePool(E_ReleasePoolType.All);
         }
 
         public override void OnPreLoad()
@@ -71,12 +71,12 @@ namespace Duskvern
         /// <summary>
         /// 根据类型释放对象池
         /// </summary>
-        /// <param name="releaseType"></param>
-        public void ReleasePool(ReleasePoolType releaseType)
+        /// <param name="eReleaseType"></param>
+        public void ReleasePool(E_ReleasePoolType eReleaseType)
         {
-            switch (releaseType)
+            switch (eReleaseType)
             {
-                case ReleasePoolType.TransitionScene:
+                case E_ReleasePoolType.TransitionScene:
                 {
                     foreach (var pool in PoolInstances)
                     {
@@ -85,7 +85,7 @@ namespace Duskvern
                     }
                     break;
                 }
-                case ReleasePoolType.All:
+                case E_ReleasePoolType.All:
                 {
                     foreach (var pool in PoolInstances)
                     {

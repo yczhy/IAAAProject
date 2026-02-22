@@ -24,7 +24,7 @@ namespace Duskvern
         }
     }
     
-    public enum NotificationType // 预制件生成时 的处理方式
+    public enum E_NotificationType // 预制件生成时 的处理方式
     {
         /// <summary>
         /// 不发送通知，对象生成或回收时不执行任何额外方法，需要自己在 OnEnable/OnDisable 里处理逻辑
@@ -71,7 +71,7 @@ namespace Duskvern
     public struct PoolConfig
     {
         [LabelText("通知类型")]
-        public NotificationType notification;
+        public E_NotificationType eNotification;
         [LabelText("策略类型")]
         public StrategyType strategy;
         [LabelText("容量")]
@@ -86,7 +86,7 @@ namespace Duskvern
         public bool warnings;
     }
     
-    public enum ReleasePoolType
+    public enum E_ReleasePoolType
     {
         TransitionScene,
         All

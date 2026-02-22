@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Duskvern;
 using NUnit.Framework;
@@ -11,10 +12,10 @@ public partial class SROptions
     private List<GameObject> objC = new ();
     
     [System.ComponentModel.Category("对象池"), DisplayName("生成物体A")]
-    public void CreateObjA()
+    public async void CreateObjA()
     {
-        var prefab = Resources.Load<GameObject>("Test/CubeA");
-        objA.Add(PoolUtil.Spawn(prefab));
+        var prefab = await SpawnUtil.Spawn("Assets/GameFrame/AddressableAssets/Cube.prefab");
+        objA.Add(prefab);
     }
     
     [System.ComponentModel.Category("对象池"), DisplayName("回收物体A")]
@@ -26,10 +27,10 @@ public partial class SROptions
     }
      
     [System.ComponentModel.Category("对象池"), DisplayName("生成物体B")]
-    public void CreateObjB()
+    public async void CreateObjB()
     {
-        var prefab = Resources.Load<GameObject>("Test/CubeB");
-        objB.Add(PoolUtil.Spawn(prefab));
+        var prefab = await SpawnUtil.Spawn("Assets/GameFrame/AddressableAssets/Cube (1).prefab");
+        objB.Add(prefab);
     }
     
     [System.ComponentModel.Category("对象池"), DisplayName("回收物体B")]
@@ -41,10 +42,10 @@ public partial class SROptions
     }
     
     [System.ComponentModel.Category("对象池"), DisplayName("生成物体C")]
-    public void CreateObjC()
+    public async void CreateObjC()
     {
-        var prefab = Resources.Load<GameObject>("Test/CubeC");
-        objC.Add(PoolUtil.Spawn(prefab));
+        var prefab = await SpawnUtil.Spawn("Assets/GameFrame/AddressableAssets/Cube (2).prefab");
+        objC.Add(prefab);
     }
     
     [System.ComponentModel.Category("对象池"), DisplayName("回收物体C")]
