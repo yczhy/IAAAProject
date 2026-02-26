@@ -61,10 +61,10 @@ namespace Duskvern
     }
 
     public abstract class IUIPanel<TPanel, T> : UIPanel 
-        where TPanel : UIPanel 
+        where TPanel : IUIPanel<TPanel, T>
         where T : IPanelContext
     {
-        public static readonly UIPageTypeBase<TPanel> uiPageType = new();
+        public static readonly UIPageTypeBase<TPanel, T> uiPageType = new();
         public override UIPageTypeBase UIPageType => uiPageType;
     }
 
@@ -74,7 +74,7 @@ namespace Duskvern
         public override string ToString() => Name;
     }
     
-    public class UIPageTypeBase<TPage> : UIPageTypeBase where TPage : IUIBasePanel
+    public class UIPageTypeBase<TPage, T> : UIPageTypeBase where TPage : IUIPanel<TPage, T> where T : IPanelContext
     {
         public readonly string name = TypeUtil.GetName<TPage>();
         public override string Name => name;

@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: UIConfig
   m_EditorClassIdentifier: 
   m_configs:
-  - m_uiPageName: 
+  - m_uiPageName: TestUI
     m_pageReference:
-      m_AssetGUID: 
+      m_AssetGUID: 8c676f0f003294a34b86d3cee640088c
       m_SubObjectName: 
       m_SubObjectType: 
-      m_EditorAssetChanged: 0
+      m_EditorAssetChanged: 1
     m_multiPages: 1
     m_layer: 0
+    cache: 1
     m_zIndex: 500
   m_layerDef:
   - m_layerName: BaseLayer

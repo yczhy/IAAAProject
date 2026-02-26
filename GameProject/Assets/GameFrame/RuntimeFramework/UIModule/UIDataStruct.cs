@@ -10,6 +10,8 @@ namespace Duskvern
     public enum E_UIPanelType
     {
         None,
+        UITest = 0,
+
     }
     
     /// <summary>
@@ -17,7 +19,7 @@ namespace Duskvern
     /// </summary>
     public interface IPanelContext
     {
-        
+        void Print();
     }
     
     /// <summary>
@@ -38,9 +40,14 @@ namespace Duskvern
         [SerializeField] private bool m_multiPages = true;
         [SerializeField, ValueDropdown("GetLayerSelection")]
         private int m_layer;
+
+        [SerializeField] private bool cache = true; public bool Cache { get { return cache; } }
         
         private const int IndexMax = 1000;
+        private const int LayerIdx = IndexMax + 1;
         [SerializeField] [Range(0, IndexMax)] private int m_zIndex = 500;
+
+        public int Index => m_zIndex * LayerIdx + m_layer;
         
         public AssetReferenceGameObject PageReference
         {
