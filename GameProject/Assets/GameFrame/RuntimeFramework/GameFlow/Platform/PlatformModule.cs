@@ -7,8 +7,10 @@ namespace Duskvern
     public class PlatformModule : PersistentMonoSingleton<PlatformModule>, IGameModule
     {
         private ChannleConfig _channgleConfig;
+
         public void OnLoad()
         {
+            
             _channgleConfig = ChannleConfig.Instance;
         }
 
@@ -19,7 +21,6 @@ namespace Duskvern
 
         public void OnPreLoad()
         {
-            
         }
 
         public void OnPreUnload()

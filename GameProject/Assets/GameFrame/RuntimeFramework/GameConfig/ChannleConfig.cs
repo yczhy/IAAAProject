@@ -15,7 +15,7 @@ namespace Duskvern
                 if (_instance == null)
                 {
                     // 尝试在 Resources 里加载
-                    _instance = Resources.Load<ChannleConfig>("Configs/ChanngleConfig");
+                    _instance = Resources.Load<ChannleConfig>("Configs/ChannleConfig");
 #if UNITY_EDITOR
                     if (_instance == null)
                         Debug.LogWarning("ChanngleConfig not found in Resources");

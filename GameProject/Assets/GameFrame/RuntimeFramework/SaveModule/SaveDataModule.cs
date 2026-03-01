@@ -13,6 +13,7 @@ namespace Duskvern
 
         #region 流程
 
+
         public override void OnLoad()
         {
             if (saveDataConfig == null)
@@ -38,7 +39,7 @@ namespace Duskvern
 
         public override void OnPreLoad()
         {
-
+      
         }
 
         public override void OnPreUnload()
@@ -67,8 +68,8 @@ namespace Duskvern
 
         #region 存档流程
 
-        public Dictionary<string, ISaveData> saveDataDict = new();
-        public Dictionary<Type, string> typeToKeyMap = new();
+        private Dictionary<string, ISaveData> saveDataDict = new();
+        private Dictionary<Type, string> typeToKeyMap = new();
 
         public void LoadSaveData() // 加载所有存档
         {

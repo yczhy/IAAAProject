@@ -9,6 +9,8 @@ namespace Duskvern
     public class GameBootstrap : MonoBehaviour
     {
         [SerializeField] private GameObject[] m_preLoadModules;
+
+        private IGameModule[] allModules;
     
         /// <summary>
         /// 这里作为全局的启动器  --- // 加载流程 -> 初始化SDK -> 初始化游戏模块 -> 进入游戏
@@ -36,8 +38,8 @@ namespace Duskvern
         /// </summary>
         private void Start()
         {
-            IGameModule[] modules = transform.GetComponentsInChildren<IGameModule>();
-            OnLoadModules(modules);
+            allModules = transform.GetComponentsInChildren<IGameModule>();
+            OnLoadModules(allModules);
         }
 
         private void OnLoadModules(IGameModule[] _modules)
@@ -53,6 +55,19 @@ namespace Duskvern
             }
         }
 
+        private void OnUnLoadModules(IGameModule[] _modules)
+        {
+            foreach (var module in _modules)
+            {
+                module.OnPreUnload();
+            }
+
+            foreach (var module in _modules)
+            {
+                module.Unload();
+            }
+        }
+
         private void OnApplicationPause(bool pauseStatus)
         {
         
@@ -60,7 +75,8 @@ namespace Duskvern
 
         private void OnApplicationQuit()
         {
-        
+            DebugLogger.LogInfo("退出游戏");
+            OnUnLoadModules(allModules);
         }
     }
 

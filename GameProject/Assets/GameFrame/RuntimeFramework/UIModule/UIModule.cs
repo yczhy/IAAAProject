@@ -102,7 +102,7 @@ namespace Duskvern
 
         public override void OnPreLoad()
         {
-
+           
         }
 
         public override void OnPreUnload()
@@ -394,7 +394,7 @@ namespace Duskvern
             }
         }
 
-        
+
         public Camera UICamera
         {
             get { return UICanvas.GetComponentInChildren<Camera>(); }

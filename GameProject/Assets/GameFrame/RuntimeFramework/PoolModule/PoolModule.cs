@@ -25,6 +25,7 @@ namespace Duskvern
         private LinkedListNode<PoolItemConfig> instancesNode;
         
         private static List<IPoolable> tempPoolables; public List<IPoolable> TempPoolables => tempPoolables;
+
         public override void OnLoad()
         {
             
@@ -94,7 +95,6 @@ namespace Duskvern
                     break;
                 }
             }
-            Debug.LogError("释放对象池的类型错误");
         }
         
         /// <summary>

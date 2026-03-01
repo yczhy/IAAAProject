@@ -14,9 +14,8 @@ public partial class SROptions
     [Category("SaveData"), DisplayName("保存存档")]
     public void SaveData()
     {
-        var timeSaveData = SaveDataModule.Instance.GetData<TimeSaveData>();
-        timeSaveData.name = "修改名字";
-        DebugLogger.LogInfo($"name " + timeSaveData.name, false);
+        SaveDataModule.Instance.SaveData<TimeSaveData>();
+
     }
 
     private int index = 0;
