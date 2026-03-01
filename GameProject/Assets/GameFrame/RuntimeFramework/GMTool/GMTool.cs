@@ -13,7 +13,7 @@ namespace Duskvern
         
         private void Update()
         {
-            if (!ChanngleConfig.Instance.OpenGM) return;
+            if (!ChannleConfig.Instance.OpenGM) return;
             
             if ((Input.GetKeyDown(KeyCode.BackQuote) || Input.touchCount >= 5) &&
                 Time.realtimeSinceStartup - _lastSwitchTime > 0.2f)
@@ -36,7 +36,7 @@ namespace Duskvern
 
         public void OnLoad()
         {
-            if (!ChanngleConfig.Instance.OpenGM) return;
+            if (!ChannleConfig.Instance.OpenGM) return;
             DealyShowPanel().Forget();
         }
         
@@ -49,7 +49,7 @@ namespace Duskvern
             {
                 mgr.ShowDebugPanel();
                 mgr.HideDebugPanel();
-                mgr.Settings.IsEnabled = ChanngleConfig.Instance.OpenGM;
+                mgr.Settings.IsEnabled = ChannleConfig.Instance.OpenGM;
             }
         }
 
@@ -76,6 +76,11 @@ namespace Duskvern
         public void OnModuleResume()
         {
              
+        }
+
+        public void OnUpdate(float deltaTime)
+        {
+           
         }
     }
 }

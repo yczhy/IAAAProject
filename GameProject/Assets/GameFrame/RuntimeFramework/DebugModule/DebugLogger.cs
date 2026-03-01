@@ -7,23 +7,22 @@ namespace Duskvern
 {
     public static class DebugLogger
     {
-        public static bool EnableLogs = true;
+        public static bool EnableLogs => ChannleConfig.Instance.OpenLog;
 
-        public static void LogInfo(string tag, string content = "", bool editorOnly = false)
+        public static void LogInfoTag(string tag, string content = "", bool editorOnly = false)
         {
             if (editorOnly && !Application.isEditor) return;
             Log(LogType.Info, tag, content);
         }
 
-        public static void LogWarning(string tag, string content = "", bool editorOnly = false)
+        public static void LogWarningTag(string tag, string content = "", bool editorOnly = false)
         {
             if (editorOnly && !Application.isEditor) return;
             Log(LogType.Warning, tag, content);
         }
 
-        public static void LogError(string tag, string content = "", bool editorOnly = false)
+        public static void LogErrorTag(string tag, string content = "")
         {
-            if (editorOnly && !Application.isEditor) return;
             Log(LogType.Error, tag, content);
         }
 
@@ -39,9 +38,8 @@ namespace Duskvern
             Log(LogType.Warning, "", content);
         }
 
-        public static void LogError(string content = "", bool editorOnly = false)
+        public static void LogError(string content = "")
         {
-            if (editorOnly && !Application.isEditor) return;
             Log(LogType.Error, "", content);
         }
 

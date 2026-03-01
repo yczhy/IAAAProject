@@ -13,6 +13,8 @@ namespace Duskvern
 
         void OnModulePause();
         void OnModuleResume();
+
+        void OnUpdate(float deltaTime);
     }
 }
 

@@ -6,10 +6,10 @@ namespace Duskvern
 {
     public class PlatformModule : PersistentMonoSingleton<PlatformModule>, IGameModule
     {
-        private ChanngleConfig _channgleConfig;
+        private ChannleConfig _channgleConfig;
         public void OnLoad()
         {
-            _channgleConfig = ChanngleConfig.Instance;
+            _channgleConfig = ChannleConfig.Instance;
         }
 
         public void Unload()
@@ -35,6 +35,11 @@ namespace Duskvern
         public void OnModuleResume()
         {
             
+        }
+
+        public void OnUpdate(float deltaTime)
+        {
+        
         }
     }
 }

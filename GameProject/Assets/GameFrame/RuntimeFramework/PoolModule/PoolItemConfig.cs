@@ -51,7 +51,7 @@ namespace Duskvern
         {
             if (!prefab.TryGetComponent(out IPoolable poolable))
             {
-                DebugLogger.LogError("对象池的预制件必须实现 IPoolable", false);
+                DebugLogger.LogError("对象池的预制件必须实现 IPoolable");
                 prefab = null;
             }
         }
@@ -69,12 +69,12 @@ namespace Duskvern
             switch (strategy)
             {
                 case StrategyType.ActivateAndDeactivate:
-                    if (activatedTransform == null) DebugLogger.LogError("PoolItemConfig.GetPoolParentTransform: activatedChild is null" + Name, false);
+                    if (activatedTransform == null) DebugLogger.LogError("activatedChild 为空 " + Name);
                     clone.SetActive(false);
                     clone.transform.SetParent(activatedTransform);
                     break;
                 case StrategyType.DeactivateViaHierarchy:
-                    if (deactivatedTransform == null) DebugLogger.LogError("PoolItemConfig.GetPoolParentTransform: deactivatedChild is null" + Name, false);
+                    if (deactivatedTransform == null) DebugLogger.LogError("deactivatedChild 为空" + Name);
                     clone.transform.SetParent(deactivatedTransform);
                     break;
             }
@@ -159,7 +159,7 @@ namespace Duskvern
             }
             else
             {
-                DebugLogger.LogWarning("PoolItemConfig.GetPoolParentTransform: cannot find IPoolable", Name);
+                DebugLogger.LogWarning("没有挂载 IPoolable 组件，无法回收对象 " + Name);
             }
         }
 
@@ -417,7 +417,7 @@ namespace Duskvern
         {
             if (clone == null)
             {
-                DebugLogger.LogError("对象池物体为null" + Name, false);
+                DebugLogger.LogError("对象池物体为null " + Name);
             }
 
             switch (eNotification)
@@ -515,13 +515,13 @@ namespace Duskvern
             {
                 if (!clone.TryGetComponent<IPoolable>(out var poolable))
                 {
-                    DebugLogger.LogError("clone没有挂载IPoolable脚本 " + clone.name, false);
+                    DebugLogger.LogError("clone没有挂载IPoolable脚本 " + clone.name);
                     return;
                 }
 
                 if (poolable.IsInPool)
                 {
-                    DebugLogger.LogError("反复将同一个物体放入对象池 " + clone.name, false);
+                    DebugLogger.LogError("反复将同一个物体放入对象池 " + clone.name);
                     return;
                 }
 

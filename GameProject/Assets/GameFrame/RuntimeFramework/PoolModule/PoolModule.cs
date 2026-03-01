@@ -7,7 +7,7 @@ namespace Duskvern
 {
     public class PoolModule : GameModule<PoolModule>, IGameModule
     {
-        public void OnUpdate(float deltaTime)
+        public override void OnUpdate(float deltaTime)
         {
             foreach (var _pool in PoolInstances)
             {

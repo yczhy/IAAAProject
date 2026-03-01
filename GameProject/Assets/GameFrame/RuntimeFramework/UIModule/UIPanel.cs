@@ -36,7 +36,7 @@ namespace Duskvern
             }
             catch (Exception e)
             {
-                DebugLogger.LogError($"关闭{UIPageType.ToString()}界面报错 {e.ToString()};", false);
+                DebugLogger.LogError($"关闭{UIPageType.ToString()}界面报错 {e.ToString()};");
             }
         }
     }
@@ -56,7 +56,7 @@ namespace Duskvern
             }
             catch (Exception e)
             {
-                DebugLogger.LogError($"打开{UIPageType.ToString()}界面报错 {e.ToString()};", false);
+                DebugLogger.LogError($"打开{UIPageType.ToString()}界面报错 {e.ToString()};");
             }
         }
     }

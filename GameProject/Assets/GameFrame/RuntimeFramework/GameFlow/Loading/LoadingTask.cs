@@ -49,7 +49,7 @@ namespace Duskvern
 
             if (task == null)
             {
-                DebugLogger.LogError($"{taskName}的任务值为null", false);
+                DebugLogger.LogError($"{taskName}的任务值为null");
                 return false;
             }
 

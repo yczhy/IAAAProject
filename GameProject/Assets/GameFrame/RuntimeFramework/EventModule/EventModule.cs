@@ -65,7 +65,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -91,12 +91,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -146,12 +146,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -165,7 +165,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -210,12 +210,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -229,7 +229,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -244,7 +244,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -265,12 +265,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -284,7 +284,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -303,7 +303,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -329,12 +329,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -348,7 +348,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -363,7 +363,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -384,12 +384,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -403,7 +403,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -422,7 +422,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -448,12 +448,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -467,7 +467,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -482,7 +482,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -503,12 +503,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -522,7 +522,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -541,7 +541,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -567,12 +567,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -586,7 +586,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -601,7 +601,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -622,12 +622,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -641,7 +641,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -660,7 +660,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -686,12 +686,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -705,7 +705,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }
@@ -720,7 +720,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    DebugLogger.LogError("添加事件错误" + parm, false);
+                    DebugLogger.LogError("添加事件错误" + parm);
                 }
             }
             else
@@ -741,12 +741,12 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm, false);
+                    if (warning) DebugLogger.LogError("移除事件类型错误" + parm);
                 }
             }
             else
             {
-                if (warning) DebugLogger.LogError("移除事件错误" + parm, false);
+                if (warning) DebugLogger.LogError("移除事件错误" + parm);
             }
         }
 
@@ -760,7 +760,7 @@ namespace Duskvern
                 }
                 else
                 {
-                    if (warning) DebugLogger.LogError("触发事件错误" + parm, false);
+                    if (warning) DebugLogger.LogError("触发事件错误" + parm);
                 }
             }
         }

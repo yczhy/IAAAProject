@@ -83,7 +83,7 @@ namespace Duskvern
             }
             else
             {
-                DebugLogger.LogInfo("未能找到符合条件的对象" + typeof(T).Name, false);
+                DebugLogger.LogInfo("未能找到符合条件的对象" + typeof(T).Name);
             }
             return instance;
         }
@@ -97,13 +97,13 @@ namespace Duskvern
             if (instance == null) return;
             if (cache.Count >= maxVolume)
             {
-                DebugLogger.LogError($"超出池子最大容量" + typeof(T).Name, false);
+                DebugLogger.LogError($"超出池子最大容量" + typeof(T).Name);
                 return; 
             }
 
             if (instance.IsInPool)
             {
-                DebugLogger.LogError($"注意发生重复放入对象池的问题" + typeof(T).Name, false);
+                DebugLogger.LogError($"注意发生重复放入对象池的问题" + typeof(T).Name);
                 return; 
             }
             instance.IsInPool = true;

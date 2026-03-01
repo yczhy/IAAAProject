@@ -21,7 +21,7 @@ namespace Duskvern
                 var module = m_preLoadModules[i].GetComponent<IGameModule>();
                 if (module == null)
                 {
-                    DebugLogger.LogError("Game Module doesn't exist: " + m_preLoadModules[i].name, false);
+                    DebugLogger.LogError("Game Module doesn't exist: " + m_preLoadModules[i].name);
                     return;
                 }
                 modules[i] = module;

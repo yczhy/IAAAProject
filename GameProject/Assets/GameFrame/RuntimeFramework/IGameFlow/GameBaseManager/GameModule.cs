@@ -19,5 +19,7 @@ namespace Duskvern
 
         public abstract void OnModulePause();
         public abstract void OnModuleResume();
+
+        public virtual void OnUpdate(float deltaTime) { }
     }
 }

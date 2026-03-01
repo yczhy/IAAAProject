@@ -126,7 +126,7 @@ namespace Duskvern
         {
             if (prefab == null)
             {
-                DebugLogger.LogError("Attempting to spawn a null prefab.", false);
+                DebugLogger.LogError("Attempting to spawn a null prefab.");
                 return null;
             }
             if (prefab.GetComponent<IPoolable>() == null)
@@ -194,7 +194,7 @@ namespace Duskvern
         {
             if (clone == null)
             {
-                DebugLogger.LogError("Attempting to despawn a null clone.", false);
+                DebugLogger.LogError("Attempting to despawn a null clone.");
                 return;
             }
             
@@ -244,7 +244,7 @@ namespace Duskvern
         {
             if (clone == null)
             {
-                DebugLogger.LogError("剥离对象池时，传入的GameObject为null", false);
+                DebugLogger.LogError("剥离对象池时，传入的GameObject为null");
                 return;
             }
             

@@ -59,7 +59,7 @@ public partial class SROptions
     [System.ComponentModel.Category("对象池"), DisplayName("查看日志")]
     public void DestroyOb22jC()
     {
-        DebugLogger.LogError("213123",false);
+        DebugLogger.LogError("213123");
         Debug.LogError("00000");
     }
 }
