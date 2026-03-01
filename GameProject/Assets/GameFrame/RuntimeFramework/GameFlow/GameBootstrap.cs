@@ -28,7 +28,6 @@ namespace Duskvern
             }
 
             OnLoadModules(modules);
-            
             DontDestroyOnLoad(this);
         }
     

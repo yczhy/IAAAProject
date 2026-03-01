@@ -24,8 +24,7 @@ public partial class SROptions
         {
             return;
         }
-
-        await panel.ClosePanel();
-        UIModule.Instance.ReleasePage(TestUI.uiPageType.Name);
+        
+        await UIModule.Instance.ClosePanel(panel);
     }
 }

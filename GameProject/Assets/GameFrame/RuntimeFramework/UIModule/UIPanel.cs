@@ -7,11 +7,11 @@ namespace Duskvern
     [RequireComponent(typeof(RectTransform))]
     public abstract class IUIBasePanel : MonoBehaviour
     {
-        public abstract E_UIPanelType PanelType { get; }
-        public abstract UIPageTypeBase UIPageType { get; }
-        private IPanelContext m_panelContext;
+        public abstract E_UIPanelType PanelType { get; } // 具体的页面类型
+        public abstract UIPageTypeBase UIPageType { get; } // 页面标识
+        protected IPanelContext m_panelContext;
         
-        [SerializeField] protected IPanelTransition m_transition;
+        [SerializeField] protected IPanelTransition m_transition; // 页面过渡
         
         private void Awake()
         {
@@ -51,6 +51,7 @@ namespace Duskvern
             {
                 OnShow();
                 if (m_transition != null) await m_transition.PlayOpen(RectTransform);
+                m_panelContext = panelContext;
                 OnOpen(panelContext);
             }
             catch (Exception e)

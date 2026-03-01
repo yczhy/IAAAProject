@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Duskvern;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.UI;
 
 namespace Duskvern
 {
@@ -143,7 +144,7 @@ namespace Duskvern
                 return null;
             }
             UILayerSetting layerSetting = m_config.LayerDef[configInfo.Layer];
-            if (!layerSetting.MultiPages || !configInfo.MultiPages) // 单例页面，如果已经打开了，就不打了
+            if (!layerSetting.MultiPages || !configInfo.MultiPages) // 单例界面
             {
                 for (int i = m_uiPanelOpenedList.Count - 1; i > -1; i--)
                 {
@@ -190,7 +191,7 @@ namespace Duskvern
 
             InitPanel(pageBaseClone, configInfo);
             await pageBaseClone.OpenPanel(context);
-            curUIPageType = string.Empty;
+            curUIPageType = pageBaseClone.UIPageType.Name;
             return pageBaseClone;
         }
 
@@ -234,11 +235,49 @@ namespace Duskvern
                     pageBaseClone.RectTransform.SetAsFirstSibling();
                 }
             }
-            
+
             int index = configInfo.Index;
             m_uiPanelOpenedList.Add(pageBaseClone);
             pageBaseClone.gameObject.SetActive(true);
             // BizzaEventSystem.Emit(EventDefine.Frame.OpenPage, pageBaseClone.UIPageType.Name);
+        }
+
+        #endregion
+
+        #region 
+
+        public async UniTask ClosePanel(UIPanel panel)
+        {
+            if (panel == null)
+            {
+                Debug.LogError("试图关闭一个null的UIPage");
+                return;
+            }
+
+            if (m_uiPanelOpenedList.Contains(panel))
+            {
+                m_uiPanelOpenedList.Remove(panel);
+            }
+
+            curUIPageType = string.Empty;
+
+            await panel.ClosePanel();
+
+            if (m_config != null &&
+                m_config.UIConfigInfos.TryGetValue(panel.UIPageType.Name, out var configInfo) &&
+                configInfo.Cache)
+            {
+                panel.gameObject.SetActive(false);
+                panel.transform.SetParent(m_PanelPoolRoot != null ? m_PanelPoolRoot : m_panelRoot, false);
+                if (!m_panelPoolList.Contains(panel))
+                {
+                    m_panelPoolList.Add(panel);
+                }
+            }
+            else
+            {
+                Destroy(panel.gameObject);
+            }
         }
 
         #endregion
@@ -309,6 +348,16 @@ namespace Duskvern
                 }
             }
 
+            for (int i = m_panelPoolList.Count - 1; i > -1; i--)
+            {
+                var panel = m_panelPoolList[i];
+                if (panel != null && panel.UIPageType.Name == pageName)
+                {
+                    Destroy(panel.gameObject);
+                    m_panelPoolList.RemoveAt(i);
+                }
+            }
+
             if (m_config && m_config.UIConfigInfos.ContainsKey(pageName))
             {
                 m_config.UIConfigInfos[pageName].PageReference.ReleaseAsset();
@@ -321,6 +370,7 @@ namespace Duskvern
 
         #region 辅助方法
 
+        [SerializeField] private Canvas m_uiCanvas;
         public Canvas UICanvas
         {
             get
@@ -331,14 +381,20 @@ namespace Duskvern
             }
         }
 
-        [SerializeField] private Canvas m_uiCanvas;
-        public Canvas GetUICanvas()
+        private CanvasScaler _UICanvasScaler;
+        public CanvasScaler UICanvasScaler
         {
-            if (m_uiCanvas == null)
-                m_uiCanvas = m_panelRoot.GetComponentInParent<Canvas>();
-            return m_uiCanvas;
+            get
+            {
+                if (_UICanvasScaler == null)
+                {
+                    _UICanvasScaler = UICanvas.GetComponent<CanvasScaler>();
+                }
+                return _UICanvasScaler;
+            }
         }
 
+        
         public Camera UICamera
         {
             get { return UICanvas.GetComponentInChildren<Camera>(); }
