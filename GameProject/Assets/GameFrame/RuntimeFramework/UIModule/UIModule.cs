@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Duskvern;
 using UnityEngine;
@@ -32,6 +33,7 @@ namespace Duskvern
         private List<RectTransform> m_panelLayerRootList;
 
         private List<UIPanel> m_panelPoolList;
+        private readonly Dictionary<string, SemaphoreSlim> m_pageLocks = new();
 
         public UIPanel GetPage(string pageName)
         {
@@ -63,6 +65,8 @@ namespace Duskvern
 
         public override void OnLoad()
         {
+            if (isLoaded) return;
+            isLoaded = true;
             m_uiPagesLoadedDic = new Dictionary<string, UIPanel>();
             m_panelLayerRootList = new List<RectTransform>();
             m_uiPanelOpenedList = new List<UIPanel>();
@@ -124,6 +128,23 @@ namespace Duskvern
 
         #region 打开页面
 
+        private bool IsSinglePage(UIConfigInfo configInfo)
+        {
+            UILayerSetting layerSetting = m_config.LayerDef[configInfo.Layer];
+            return !layerSetting.MultiPages || !configInfo.MultiPages;
+        }
+
+        private SemaphoreSlim GetPageLock(string pageName)
+        {
+            if (!m_pageLocks.TryGetValue(pageName, out var lockHandle))
+            {
+                lockHandle = new SemaphoreSlim(1, 1);
+                m_pageLocks.Add(pageName, lockHandle);
+            }
+
+            return lockHandle;
+        }
+
         public async UniTask<TPanel> OpenPage<TPanel, TContext>(
             UIPageTypeBase<TPanel, TContext> uiPageType, TContext context, bool block = true)
             where TPanel : IUIPanel<TPanel, TContext>
@@ -143,56 +164,70 @@ namespace Duskvern
             {
                 return null;
             }
-            UILayerSetting layerSetting = m_config.LayerDef[configInfo.Layer];
-            if (!layerSetting.MultiPages || !configInfo.MultiPages) // 单例界面
-            {
-                for (int i = m_uiPanelOpenedList.Count - 1; i > -1; i--)
-                {
-                    var page = m_uiPanelOpenedList[i];
-                    if (page.UIPageType.Name == pageName)
-                    {
-                        if (!page.gameObject.activeSelf)
-                        {
-                            InitPanel(page, configInfo);
-                        }
 
-                        curUIPageType = string.Empty;
-                        // 找到相同页面
-                        await page.OpenPanel(context);
-                        return page;
+            bool isSinglePage = IsSinglePage(configInfo);
+            SemaphoreSlim pageLock = isSinglePage ? GetPageLock(pageName) : null;
+            if (pageLock != null)
+            {
+                await pageLock.WaitAsync();
+            }
+
+            try
+            {
+                if (isSinglePage) // 单例界面
+                {
+                    for (int i = m_uiPanelOpenedList.Count - 1; i > -1; i--)
+                    {
+                        var page = m_uiPanelOpenedList[i];
+                        if (page.UIPageType.Name == pageName)
+                        {
+                            if (!page.gameObject.activeSelf)
+                            {
+                                InitPanel(page, configInfo);
+                            }
+
+                            curUIPageType = string.Empty;
+                            // 找到相同页面
+                            await page.OpenPanel(context);
+                            return page;
+                        }
                     }
                 }
-            }
 
-            await LoadPageAsync(pageName, autoInstance: false);
-            if (!m_uiPagesLoadedDic.TryGetValue(pageName, out var pageBase) || pageBase == null)
-            {
-                curUIPageType = string.Empty;
-                return null;
-            }
-
-            UIPanel pageBaseClone = null;
-            for (int i = m_panelPoolList.Count - 1; i > -1; i--)
-            {
-                var cachePage = m_panelPoolList[i];
-                if (cachePage != null && cachePage.UIPageType.Name == pageName)
+                await LoadPageAsync(pageName, autoInstance: false);
+                if (!m_uiPagesLoadedDic.TryGetValue(pageName, out var pageBase) || pageBase == null)
                 {
-                    pageBaseClone = cachePage;
-                    m_panelPoolList.RemoveAt(i);
-                    pageBaseClone.transform.SetParent(m_panelLayerRootList[configInfo.Layer], false);
-                    break;
+                    curUIPageType = string.Empty;
+                    return null;
                 }
-            }
 
-            if (pageBaseClone == null)
+                UIPanel pageBaseClone = null;
+                for (int i = m_panelPoolList.Count - 1; i > -1; i--)
+                {
+                    var cachePage = m_panelPoolList[i];
+                    if (cachePage != null && cachePage.UIPageType.Name == pageName)
+                    {
+                        pageBaseClone = cachePage;
+                        m_panelPoolList.RemoveAt(i);
+                        pageBaseClone.transform.SetParent(m_panelLayerRootList[configInfo.Layer], false);
+                        break;
+                    }
+                }
+
+                if (pageBaseClone == null)
+                {
+                    pageBaseClone = Instantiate(pageBase, m_panelLayerRootList[configInfo.Layer]);
+                }
+
+                InitPanel(pageBaseClone, configInfo);
+                await pageBaseClone.OpenPanel(context);
+                curUIPageType = pageBaseClone.UIPageType.Name;
+                return pageBaseClone;
+            }
+            finally
             {
-                pageBaseClone = Instantiate(pageBase, m_panelLayerRootList[configInfo.Layer]);
+                pageLock?.Release();
             }
-
-            InitPanel(pageBaseClone, configInfo);
-            await pageBaseClone.OpenPanel(context);
-            curUIPageType = pageBaseClone.UIPageType.Name;
-            return pageBaseClone;
         }
 
         private void InitPanel(UIPanel pageBaseClone, UIConfigInfo configInfo)
@@ -254,29 +289,46 @@ namespace Duskvern
                 return;
             }
 
-            if (m_uiPanelOpenedList.Contains(panel))
+            string pageName = panel.UIPageType.Name;
+            bool isSinglePage = m_config != null &&
+                                m_config.UIConfigInfos.TryGetValue(pageName, out var closeConfigInfo) &&
+                                IsSinglePage(closeConfigInfo);
+            SemaphoreSlim pageLock = isSinglePage ? GetPageLock(pageName) : null;
+            if (pageLock != null)
             {
-                m_uiPanelOpenedList.Remove(panel);
+                await pageLock.WaitAsync();
             }
 
-            curUIPageType = string.Empty;
-
-            await panel.ClosePanel();
-
-            if (m_config != null &&
-                m_config.UIConfigInfos.TryGetValue(panel.UIPageType.Name, out var configInfo) &&
-                configInfo.Cache)
+            try
             {
-                panel.gameObject.SetActive(false);
-                panel.transform.SetParent(m_PanelPoolRoot != null ? m_PanelPoolRoot : m_panelRoot, false);
-                if (!m_panelPoolList.Contains(panel))
+                curUIPageType = string.Empty;
+
+                await panel.ClosePanel();
+
+                if (m_uiPanelOpenedList.Contains(panel))
                 {
-                    m_panelPoolList.Add(panel);
+                    m_uiPanelOpenedList.Remove(panel);
+                }
+
+                if (m_config != null &&
+                    m_config.UIConfigInfos.TryGetValue(panel.UIPageType.Name, out var configInfo) &&
+                    configInfo.Cache)
+                {
+                    panel.gameObject.SetActive(false);
+                    panel.transform.SetParent(m_PanelPoolRoot != null ? m_PanelPoolRoot : m_panelRoot, false);
+                    if (!m_panelPoolList.Contains(panel))
+                    {
+                        m_panelPoolList.Add(panel);
+                    }
+                }
+                else
+                {
+                    Destroy(panel.gameObject);
                 }
             }
-            else
+            finally
             {
-                Destroy(panel.gameObject);
+                pageLock?.Release();
             }
         }
 

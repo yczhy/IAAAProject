@@ -16,6 +16,7 @@ namespace Duskvern
         private void Awake()
         {
             m_rectTransform = transform as RectTransform;
+            OnAwake();
         }
 
         protected virtual void OnAwake() { }

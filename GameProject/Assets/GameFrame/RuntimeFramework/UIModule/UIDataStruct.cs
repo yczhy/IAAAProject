@@ -83,7 +83,10 @@ namespace Duskvern
         private void OnPageReferenceChange()
         {
             if (m_pageReference == null || m_pageReference.editorAsset == null)
+            {
                 m_uiPageName = string.Empty;
+                return;
+            }
             UIPanel pageBase = m_pageReference.editorAsset.GetComponent<UIPanel>();
             m_uiPageName = pageBase.UIPageType.Name;
         }
