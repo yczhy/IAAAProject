@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1001,
+    "monsterInfo": {
+      "name": "monsterA",
+      "level": 1
+    },
+    "icon": "icon1"
+  },
+  {
+    "id": 1002,
+    "monsterInfo": {
+      "name": "monsterB",
+      "level": 2
+    },
+    "icon": "icon2"
+  }
+]
