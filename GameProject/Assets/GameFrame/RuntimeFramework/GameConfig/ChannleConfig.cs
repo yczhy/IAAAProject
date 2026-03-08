@@ -25,15 +25,48 @@ namespace Duskvern
             }
         }
 
+
+        #region 广告
+
+        public List<AdSourceConfig> AdSourceConfigs = new List<AdSourceConfig>();
+
+
+        public string GetAdId(E_AdUnitSource source, E_Adtype adType)
+        {
+            string adId = "";
+            foreach (var cfg in AdSourceConfigs)
+            {
+                if (cfg.Source != source) continue;
+                adId = adType switch
+                {
+                    E_Adtype.InsertAd => cfg.IdParam.InsertId,
+                    E_Adtype.RewardAd => cfg.IdParam.RewardId,
+                    E_Adtype.BannerAd => cfg.IdParam.BannerId,
+                    E_Adtype.NativeAd => cfg.IdParam.NativeId,
+                    _ => "",
+                };
+                break;
+            }
+            if (string.IsNullOrEmpty(adId))
+            {
+                DebugLogger.LogError($"广告Id没有配置：源 {source} --- 类型 {adType}");
+            }
+            return adId;
+        }
+
+        #endregion
+
+        #region GM开关
+
         [SerializeField] private bool openGM;
 
         public bool OpenGM
         {
             get
             {
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 openGM = true;
-                #endif
+#endif
                 return openGM;
             }
         }
@@ -43,11 +76,14 @@ namespace Duskvern
         {
             get
             {
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 openLog = true;
-                #endif
+#endif
                 return openLog;
             }
         }
+
+        #endregion
+
     }
 }
